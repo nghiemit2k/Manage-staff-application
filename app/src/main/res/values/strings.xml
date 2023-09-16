@@ -8,4 +8,9 @@
     <string name="action_search">search</string>
     <string name="action_sort">sort</string>
     <string name="action_profile">profile</string>
+    <string name="txt_fullname">FullName: %s</string>
+    <string name="txt_email">Email: %s</string>
+    <string name="txt_birthdate">BirthDate: %s</string>
+    <string name="txt_phonenumber">Phone Number: %s</string>
+    <string name="txt_gender">Gender: %s</string>
 </resources>

@@ -39,7 +39,7 @@ class HomeFragment : Fragment(),MenuProvider {
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when(menuItem.itemId) {
-            R.id.main_menu_item_profile -> {
+            R.id.main_menu_item_search -> {
                 true
             }
             else -> false
