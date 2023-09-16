@@ -1,4 +1,7 @@
 package com.example.projectmanagestaff.ui
 
-class LoginFormState {
-}
+data class LoginFormState(
+    val emailError: Int? = null,
+    val passwordError: Int? = null,
+    val isCorrect: Boolean = false
+)
