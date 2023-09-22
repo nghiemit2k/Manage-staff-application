@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.projectmanagestaff.MyApplication
 import com.example.projectmanagestaff.R
+import com.example.projectmanagestaff.data.model.User
 import com.example.projectmanagestaff.databinding.FragmentProfileBinding
 import com.example.projectmanagestaff.ui.home.HomeFragmentDirections
 import com.example.projectmanagestaff.ui.login.LoginFragment
@@ -46,5 +47,30 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.user.observe(viewLifecycleOwner) {
+            if(it==null) {
+                val action = ProfileFragmentDirections.actionProfileFragmentToLoginFragment()
+                navController.navigate(action)
+            } else {
+                showProfile(it)
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        navController.currentBackStackEntry!!.savedStateHandle.remove<Boolean>(LoginFragment.LOGIN_SUCCESSFUL)
+    }
+    private fun showProfile(user: User?) {
+        user?.let {
+            binding.textProfileFullname.text = getString(R.string.txt_fullname,user.fullName)
+            binding.textProfileEmail.text = getString(R.string.txt_email,user.email)
+            binding.textProfileBirthdate.text = getString(R.string.txt_birthdate,user.birthdate)
+            binding.textProfilePhoneNumber.text = getString(R.string.txt_phonenumber,user.phoneNumber)
+            binding.textProfileGender.text = getString(R.string.txt_gender,user.gender)
+        }
+    }
 
 }

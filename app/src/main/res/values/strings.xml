@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project Manage Staff</string>
+    <string name="app_name">Manage Staff</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Fragment Detail</string>
     <string name="error_email_blank">Email cannot leave empty\n</string>
@@ -13,4 +13,7 @@
     <string name="txt_birthdate">BirthDate: %s</string>
     <string name="txt_phonenumber">Phone Number: %s</string>
     <string name="txt_gender">Gender: %s</string>
+    <string name="error_login_failed">Invalid email or password!</string>
+    <string name="title_login">Login</string>
+    <string name="title_profile">Profile</string>
 </resources>

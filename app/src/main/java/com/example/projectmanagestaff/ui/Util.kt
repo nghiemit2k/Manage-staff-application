@@ -1,8 +1,11 @@
 package com.example.projectmanagestaff.ui
 
+import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
 import com.google.android.material.textfield.TextInputEditText
+import java.text.SimpleDateFormat
+import java.util.Date
 
 fun TextInputEditText.afterTextChanged(afterTextChanged: (String)->Unit) {
     this.addTextChangedListener(object :TextWatcher {
@@ -19,4 +22,12 @@ fun TextInputEditText.afterTextChanged(afterTextChanged: (String)->Unit) {
         }
 
     })
+}
+
+@SuppressLint("SimpleDateFormat")
+fun dateToString(date: Date?): String {
+    val format = "dd/MM/yyyy"
+    val dateFormat = SimpleDateFormat(format)
+    date?.let { return dateFormat.format(it) }
+    return "01/01/2000"
 }

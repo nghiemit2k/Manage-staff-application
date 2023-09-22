@@ -13,6 +13,7 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.projectmanagestaff.R
 
 class HomeFragment : Fragment(),MenuProvider {
@@ -39,7 +40,9 @@ class HomeFragment : Fragment(),MenuProvider {
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when(menuItem.itemId) {
-            R.id.main_menu_item_search -> {
+            R.id.main_menu_item_profile -> {
+                val action = HomeFragmentDirections.actionHomeFragment2ToProfileFragment()
+                findNavController().navigate(action)
                 true
             }
             else -> false
