@@ -27,7 +27,7 @@ class HomeFragment : Fragment(),MenuProvider {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         val btnGoDetail = view.findViewById<Button>(R.id.btn_go_detail)
         btnGoDetail.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment2_to_detailFragment)
+            it.findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
         }
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(this,viewLifecycleOwner,Lifecycle.State.RESUMED)
@@ -41,7 +41,7 @@ class HomeFragment : Fragment(),MenuProvider {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when(menuItem.itemId) {
             R.id.main_menu_item_profile -> {
-                val action = HomeFragmentDirections.actionHomeFragment2ToProfileFragment()
+                val action = HomeFragmentDirections.actionHomeFragmentToProfileFragment()
                 findNavController().navigate(action)
                 true
             }

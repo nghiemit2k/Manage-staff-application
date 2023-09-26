@@ -33,8 +33,8 @@ class ProfileFragment : Fragment() {
         val savedStateHandle = currentBackStackEntry?.savedStateHandle
         savedStateHandle?.getLiveData<Boolean>(LoginFragment.LOGIN_SUCCESSFUL)?.observe(currentBackStackEntry) {success ->
             if(!success) {
-                val action = HomeFragmentDirections.actionGlobalHomeFragment2()
-                navController.navigate(action)
+//                val action = HomeFragmentDirections.actionGlobalHomeFragment2()
+//                navController.navigate(action)
             }
 
         }

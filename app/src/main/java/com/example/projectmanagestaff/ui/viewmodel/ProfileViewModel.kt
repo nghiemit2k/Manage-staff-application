@@ -4,13 +4,15 @@ import androidx.core.util.PatternsCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.projectmanagestaff.R
 import com.example.projectmanagestaff.data.model.User
 import com.example.projectmanagestaff.data.repository.ProfileRepository
 import com.example.projectmanagestaff.data.repository.ProfileRepositoryImpl
 import com.example.projectmanagestaff.ui.LoginFormState
+import kotlinx.coroutines.launch
 
-class ProfileViewModel(private val repositoryImpl: ProfileRepository):ViewModel() {
+class ProfileViewModel(private val repository: ProfileRepository):ViewModel() {
     private val _user = MutableLiveData<User?>()
     val user: LiveData<User?> =_user
     private val _loginFormState = MutableLiveData<LoginFormState>()
@@ -20,7 +22,11 @@ class ProfileViewModel(private val repositoryImpl: ProfileRepository):ViewModel(
         _user.value = null
     }
     fun login(email: String, password: String) {
-
+        viewModelScope.launch {
+            repository.login(email, password).collect{
+                _user.postValue(it)
+            }
+        }
     }
     fun loginDataChanged(email: String,password: String) {
         if(email.isBlank()) {
