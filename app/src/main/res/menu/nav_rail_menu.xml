@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:id="@+id/group_navigation">
+
+        <item
+            android:id="@+id/menu_item_drawer_home"
+            android:icon="@drawable/ic_home_24"
+            android:title="@string/title_home" />
+        <item
+            android:id="@+id/menu_item_drawer_register"
+            android:icon="@drawable/ic_add_person"
+            android:title="@string/title_register"
+            app:showAsAction="ifRoom|withText" />
+    </group>
+    <item
+        android:id="@+id/menu_item_drawer_setting"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/title_settings"
+        app:showAsAction="ifRoom|withText|collapseActionView">
+        <menu>
+            <item
+                android:id="@+id/menu_item_drawer_dark_mode"
+                android:icon="@drawable/ic_dark_mode"
+                android:title="@string/action_dark_mode"
+                app:actionLayout="@layout/layout_switch"
+                app:showAsAction="ifRoom|withText" />
+            <item
+                android:id="@+id/menu_item_drawer_language"
+                android:icon="@drawable/ic_language"
+                android:title="@string/action_languages"
+                app:showAsAction="ifRoom|withText" />
+            <item
+                android:id="@+id/menu_item_drawer_font_size"
+                android:icon="@drawable/ic_format_size"
+                android:title="@string/font_size"
+                app:showAsAction="ifRoom|withText" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/item_other"
+        android:title="@string/title_others_menu">
+        <menu>
+
+
+
+        </menu>
+    </item>
+    <group>
+        <item
+            android:id="@+id/menu_item_drawer_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/action_logout"
+            app:showAsAction="ifRoom|withText" />
+    </group>
+</menu>
