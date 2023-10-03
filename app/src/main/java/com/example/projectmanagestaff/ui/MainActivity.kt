@@ -17,62 +17,56 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.navigationrail.NavigationRailView
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
-    private var drawerLayout: DrawerLayout? = null
-    private var navView: NavigationView? = null
-    private var navigationRail: NavigationRailView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val toolbar = binding.include.toolbar
-        val bottomNavigation = binding.include.bottomNav
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-        // init bottom
-        bottomNavigation?.setupWithNavController(navController)
-        // lấy tham chiếu tới drawer layout nếu nó tồn tại
-        drawerLayout = findViewById(R.id.drawer_layout)
+
+        // thiết lập bottom navigation
+        val bottomNavigationView = binding.includeMainLayout?.bottomNav
+        bottomNavigationView?.setupWithNavController(navController)
+
         // thiết lập nút Up và 3 màn hình chính của 3 tab và navigation drawer
-        // create function for press up
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeFragment, R.id.registerFragment, R.id.settingsFragment2),
-            //
+            setOf(R.id.nav_home, R.id.nav_register, R.id.nav_settings),
             drawerLayout = binding.drawerLayout
         )
+        // gắn navigation view vào navController:
+        binding.navView?.setupWithNavController(navController)
 
-
-        setSupportActionBar(toolbar)
+        // thiết lập toolbar làm action bar
+        setSupportActionBar(binding.includeMainLayout?.toolbar)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar?.setupWithNavController(navController, appBarConfiguration)
+        binding.includeMainLayout
+            ?.toolbar
+            ?.setupWithNavController(navController, appBarConfiguration)
 
-        // thiết lập navigation rail nếu nó tồn tại
-//        navigationRail = findViewById(R.id.nav_rail)
-        navigationRail?.setupWithNavController(navController)
-        binding.navView.setupWithNavController(navController)
-        setupActionBarWithNavController(navController,appBarConfiguration)
-        setUpDrawerListener(drawerLayout)
         onDestinationChanged()
+        setUpDrawerListener()
+        setUpNavigationDrawerItemSelected()
     }
 
-    // lắng nghe sự kiện trang đích thay đổi
     private fun onDestinationChanged() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeFragment -> {
+                R.id.nav_home -> {
                     // do something if destination is home fragment
                 }
 
-                R.id.registerFragment -> {
+                R.id.nav_register -> {
                     // do something if destination is register fragment
                 }
 
-                R.id.settingsFragment2 -> {
+                R.id.nav_settings -> {
                     // do something if destination is setting fragment
                 }
 
@@ -84,8 +78,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     // bắt sự kiện navigation drawer mở, đóng, trượt, thay đổi trạng thái
-    private fun setUpDrawerListener(drawerLayout: DrawerLayout?) {
-        drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
+    private fun setUpDrawerListener() {
+        binding.drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                 // todo
             }
@@ -103,10 +97,32 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-    // create function for press back
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp(appBarConfiguration)  || super.onSupportNavigateUp()
+
+    // lắng nghe sự kiện một phần tử trong menu navigation drawer được click
+    private fun setUpNavigationDrawerItemSelected() {
+        binding.navView?.setNavigationItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.menu_item_drawer_search -> {
+                    // todo
+                }
+
+                R.id.menu_item_drawer_about -> {
+                    // todo
+                }
+
+                R.id.menu_item_drawer_import -> {
+                    // todo
+                }
+
+                // ...
+            }
+            false
+        }
     }
 
-
+    // cho phép bắt sự kiến nhấn Back
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration)
+                || super.onSupportNavigateUp()
+    }
 }

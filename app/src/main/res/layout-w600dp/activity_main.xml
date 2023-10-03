@@ -6,20 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-
     <com.google.android.material.navigationrail.NavigationRailView
         android:id="@+id/nav_rail"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-
         android:fitsSystemWindows="true"
-
-        app:menu="@menu/nav_draw"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/nav_rail_menu"
         tools:ignore="MissingClass,MissingConstraints" />
 
     <include
         android:id="@+id/include"
         layout="@layout/layout_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
